@@ -1,0 +1,138 @@
+import java.util.Scanner;
+class BankAccount
+{
+int id;
+String name;
+static String bankName;
+double balance;
+
+BankAccount(){                                                    //default constructor
+id=101;
+name="Abhi";
+bankName="SBI";
+balance=500;
+}
+ 
+BankAccount(int id, String name,String bankName,double balance)                                    //parameterized constructor
+{
+this.id = id;
+this.name = name;
+this.bankName=bankName;
+this.balance = balance;
+}
+
+void getDetails() {                                                  //getdetails
+Scanner s = new Scanner(System.in);
+System.out.println("\nEnter the accountid : ");
+id = s.nextInt();
+Scanner sca = new Scanner(System.in);		 
+System.out.println("\nEnter name of owner : ");
+name = sca.nextLine();	
+System.out.println("\nEnter the balance: ");
+balance = s.nextDouble();	 
+
+}
+
+public String toString()                                                //toString
+{ 
+return id + "                       " + name + "                           " + bankName+"                          "+balance;
+} 
+
+void withdraw(double amount)                        //withdraw
+{
+if(balance>=amount)
+balance -= amount;
+else
+System.out.println("\ninsufficient balance");
+}
+
+void deposit(double amount)                            //deposit
+{
+balance += amount;
+}
+
+void chargeFees(double amount)                   //chargeFees
+{
+if(balance<0){
+System.out.println("\nFees upto Rs.1000 has to be paid due to insufficient balance in the account");}
+else{
+System.out.println("\nNo fees charged");}
+}
+
+void changeName(String oldName)                    //changeName
+{
+System.out.println("Enter the new name of account holder");
+Scanner c = new Scanner(System.in);
+String name=c.nextLine();
+System.out.println("New name is "+name);
+}
+}
+
+public class BankTest                          //main class
+{
+
+public static void main(String[] args)
+{
+BankAccount account1 = new BankAccount();
+BankAccount account2 = new BankAccount();
+int i;
+do{
+System.out.println("\n1.Enter the details\n2.Display the account details\n3. Amount deposited in accounts\n4.Amount withdrawn from accounts\n5.Fees charged\n6.Change name");
+System.out.println("\nEnter your choice:");
+int option;
+Scanner s = new Scanner(System.in);
+option=s.nextInt();
+switch(option)
+{
+case 1:
+System.out.println("\nEnter the details of two Account holders");
+account1.getDetails();
+account2.getDetails();
+break;
+
+case 2:
+System.out.println("Display the account id:\t account holder name:\t\t Bank name:\t\t Balance :");
+System.out.println(account1.toString());
+System.out.println(account2.toString());  
+break;
+
+case 3:
+System.out.println("\nAmount deposited in the account");
+account1.deposit(200);
+account2.deposit(100);
+break;
+
+case 4:
+System.out.println("\nAmount withdrawn from the accounts");
+account1.withdraw(500);
+account2.withdraw(500);
+break;
+
+case 5:
+System.out.println("\nCharge the fees if balance in the account is not sufficient");
+account1.chargeFees(1000);
+account2.chargeFees(1000);
+break;
+
+case 6:
+System.out.println("\nEnter the account id whose name you want to change ");
+Scanner sca = new Scanner(System.in);
+int a=sca.nextInt();
+if(a==account1.id)
+account1.changeName(account1.name);
+else
+account2.changeName(account2.name);
+break;
+
+default:System.out.println("\nInvalid choice");
+break;
+             
+}
+System.out.println("\ndo you want to continue 1 or 0");
+Scanner sc = new Scanner(System.in);
+i=sc.nextInt();
+}while(i==1);
+
+}
+}
+
